@@ -1,0 +1,38 @@
+{
+  "name": "pi-mcp",
+  "version": "0.5.1",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "start": "bun run index.ts",
+    "start:tui": "bun run index.ts --tui",
+    "start:plain": "bun run index.ts --no-tui",
+    "tui:demo": "bun run scripts/tui-demo.ts",
+    "dev": "bun --watch index.ts",
+    "build": "bun run scripts/build.ts",
+    "build:tar": "bun run scripts/build.ts -- --tar",
+    "build:run": "./dist/pi-mcp",
+    "typecheck": "tsc --noEmit",
+    "test": "bun test ./tests",
+    "tmux:start": "tmux new-session -d -s pi-mcp -c \"$PWD\" 'bun --watch index.ts' && echo 'pi-mcp 已在 tmux 启动；bun run tmux:attach 接入'",
+    "tmux:attach": "tmux attach -t pi-mcp",
+    "tmux:logs": "tmux capture-pane -pt pi-mcp",
+    "tmux:stop": "tmux kill-session -t pi-mcp",
+    "tmux:restart": "tmux kill-session -t pi-mcp 2>/dev/null; bun run tmux:start"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^7"
+  },
+  "dependencies": {
+    "@earendil-works/pi-agent-core": "0.87.1",
+    "@earendil-works/pi-coding-agent": "0.87.1",
+    "@earendil-works/pi-tui": "0.87.1",
+    "@modelcontextprotocol/server": "^2.1.0",
+    "jose": "^6.2.12",
+    "zod": "^4.6.5"
+  }
+}
